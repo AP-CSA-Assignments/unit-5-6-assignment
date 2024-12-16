@@ -7,7 +7,7 @@ git config user.email "email"
 ```
 
 ## Compiling and Running Java Programs
-Note that since the shape classes are separate classes, you will need to compile ALL the files (at least one time).  You can do this by running
+Note that since our classes are separate classes, you will need to compile ALL the files (at least one time).  You can do this by running
 ```
 javac *.java
 ```
@@ -22,80 +22,62 @@ After you compile the shape classes, you only need to compile and run `Main.java
 
 # Instructions  
 
-## Classwork
-Follow along in class and create the Dog class in the file named Dog.java.
+## In-Lesson
 
-## Problem 1 - Person Class
-Create a class named `Person` which will represent a unique person. The class should store the following information in appropriate (private) variables:
+### Warm Up
+Complete the `Dog` class by adding accessor and mutator methods (getters and setters).
 
-* The first name of the person
-* The last name of the person
-* The age of the person (in years)
-* The social security number (SSN) of the person
+### In-Lesson Activity 1
+Add functionality to the `Student` class by adding constructors.  Make at least 3 constructors (one of them must be the default constructor).
 
-You'll need to add member variables (fields) to your class to store the information for a person - make sure you choose the names of these carefully to avoid a conflict with the names of the parameters you use in your constructor.
+### In-Lesson Activity 2
+Add functionality to the `Student` class by adding accessor and mutator methods.  Practice using the `this` keyword.
 
-Create setters and getters for your class, and test each function.  Also create the `toString()` method, which should return a string representing the Player in the format shown below.  You **MUST** include the tabs using the tab escape character `\t`.
-```
-SSN: Social Security Number
-	Name: Person's Name
-	Age: Person's age
-```
+## Classwork - The Plane Class
+Create a class named `Plane` that simulates a plane moving up and down along 4000 feet in altitude.
 
-**Sample run**
-```
-Enter the person's first name:
-Jon
-Enter the person's last name: 
-Doe
-Enter the person's age: 
-35
-Enter the person's social security number: 
-123456789
-
-Output:
-SSN: 123456789
-	Name: Jon Doe
-	Age: 35
-```
-
-## Problem 2 - Oven Class
-Finish writing the `Oven` class that represents an oven. This class has the variables, constructors and methods detailed below. You should write code implementing the methods and constructors so they behave as described.
+Your class will build a plane and keep track of its location in the air. Location values may range from -2000 to 2000. A location value of 0 represents 0 feet, a location value of 100 represents 100 feet, a location value of 200 represents 200 feet, etc. The value of 0 just means the starting position, not actually 0 feet from sea level. If the user tries to move the plane beyond +2000 or -2000, set the location to +/- 2000 respectively.
 
 ### Variables
+* `int location` - An integer that holds the current block location of the plane in the sky, with possible values ranging from -2000 to 2000.
 
-* `private int maxTemp` - the maximum temperature of the oven. This value should not be changed after the oven is constructed. If the temperature is greater than 500 or less than 0, it should be changed to 500.
-* `private int currentTemp` - the current temperature of the oven. Should not be greater than maxTemp or less than 0. If currentTemp is greater than maxTemp, it should be set to maxTemp. If currentTemp is less than 0, it should be set to 0.
+### Constructors
+* `Plane()` - Sets location to 0.
+* `Plane(int loc)` - If loc is between -2000 and 2000 inclusive, sets location to loc. Otherwise, sets location to 0.
 
 ### Methods
-* `public int getMaxTemp()` - returns the `maxTemp` of the oven.
-* `public int getCurrentTemp()`- returns the currentTemp of the oven.
-* `public void turnOff()` - sets the `currentTemp` of the oven to 0 if the `currentTemp` of the oven is greater than 0.
-* `public boolean isOn()` - return true if `currentTemp` of the oven is greater than 0.
-* `public void preheat(int temp)` - sets `currentTemp` of the oven to temp. If `temp` is greater than `maxTemp`, then set `currentTemp` to `maxTemp`. If `temp` is less than or equal to 0, do nothing.
-* `public String toString()` - Returns a String of the format `"New oven with a maximum temperature of maxTemp and a starting temperature of currentTemp"`
+* `void upward()` - Moves the plane upward 100 feet. Do not let the user move past 2000 feet.
+* `void downward()` - Moves the plane downward 100 feet. Do not let the user move past -2000 feet.
+* `int getLocation()` - Returns an integer representing the location of the plane.
+* `String toString()` - Returns a String representation showing the plane as an `@` character, with spaces to show its location. When the plane is at location -2000 the `@` character appears at the start of the String. When the plane is at a higher position, one space for each number from -2000 to the plane's current location appears before the @. For example, if the plane is at -1000 feet, the method will return `"          @"` (10 spaces then the `'@'`). If the plane is at 500 feet the method will return `"                         @"` (25 spaces then the `'@'`).
 
-**Sample run**
+### Sample Run
 ```
-Maximum oven temperature: 
-450
-Starting temperature of the oven: 
-70
-New oven with a maximum temperature of 450 and a starting temperature of 70 degrees.
-To preheat the oven enter "p", to turn the oven off enter "o", to restart enter "r", to quit enter "q"
-p
-Enter the temperature to preheat the oven to: 
-350
-Current temperature of the oven is now 350 degrees
-
-New oven with a maximum temperature of 450 and a starting temperature of 350 degrees.
-To preheat the oven enter "p", to turn the oven off enter "o", to restart enter "r", to quit enter "q"
-o
-Turning the oven off.
-
-New oven with a maximum temperature of 450 and a starting temperature of 0 degrees. 
-To preheat the oven enter "p", to turn the oven off enter "o", to restart enter "r", to quit enter "q"
+					  @
+Location: 0
+Type "u" to move upwards, "d" to move downwards, "n" for new Plane, "q" to quit.
+u
+					  @
+Location: 100
+Type "u" to move upwards, "d" to move downwards, "n" for new Plane, "q" to quit.
+n
+Starting location for a new Plane?
+-500
+			   @
+Location: -500
+Type "u" to move upwards, "d" to move downwards, "n" for new Plane, "q" to quit.
+d
+			  @
+Location: -600
+Type "u" to move upwards, "d" to move downwards, "n" for new Plane, "q" to quit.
 q
 ```
 
-**Hint** - Start by writing the 3 accessor methods - `getMaxTemp`, `getCurrentTemp` and `isOn`. These methods just need to return the relevant member variables. Then you can focus on writing and testing the more difficult remaining methods.
+### Milestones
+As this is a more substantial coding exercise than most of the ones you have seen so far, we have provided milestones for you to help you think about how to build your `Plane` class.
+
+* **Milestone 1:** Write the class header for your `Plane` class, and add curly braces - you will write the rest of your code inside these braces. Write a header and curly braces for each constructor and method in the class. For the two methods which return values add "dummy returns" - for example return 0; for `getLocation` and return ""; for `toString`. You will delete these returns later, but they will allow you to compile your code and test it in the meantime - you should check this works before moving on.
+* **Milestone 2:** Add a private member variable for the location at the start of your class. Write the code inside your constructor to set up this variable correctly. Change the return statement inside your `getLocation` method to return the location and use this to test your constructor class.
+* **Milestone 3:** Add code to your upward and downward methods to change the location variable as described.
+* **Milestone 4:** Add code to your `toString` method to print the `Plane` at its correct location. You will probably need to use a loop to add the correct amount of spaces before the "@" symbol representing the variable - remember you will need no spaces before the `Plane` when it is in position -2000, 20 spaces when it is in position 0, and 40 spaces when it is in position 2000.
+  
